@@ -8,6 +8,8 @@ import Login from "./login/Login";
 import Register from "./register/Register";
 import Admin from "./admin/Admin";
 import User from "./user/User";
+import Logout from "./logout/Logout";
+
 function App() {
   return (
     <Router>
@@ -26,7 +28,11 @@ function App() {
           <Route path="/user">
               <User />
           </Route>
+          <Route path="/logout">
+            <Logout />
+          </Route>
           <Route path="/" component={Home} />
+          
         </Switch>
         <Footer />
       </div>

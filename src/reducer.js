@@ -14,6 +14,8 @@ export const initialState = {
         };
       case "REMOVE_TO_CART":
         return { state };
+      case "LOGOUT":
+        return {...state , userInfo: action.item};
       default:
         return state;
     }
