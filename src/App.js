@@ -9,6 +9,7 @@ import Register from "./register/Register";
 import Admin from "./admin/Admin";
 import User from "./user/User";
 import Logout from "./logout/Logout";
+import Deposit from "./deposit/Deposit";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/user">
               <User />
+          </Route>
+          <Route path="/deposit">
+              <Deposit />
           </Route>
           <Route path="/logout">
             <Logout />
