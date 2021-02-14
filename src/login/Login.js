@@ -2,7 +2,7 @@ import * as React from "react";
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
-import service from "../service/BankService";
+import service from "../service/bankService";
 import { ToastContainer, toast } from "react-toastify";
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router";
@@ -69,6 +69,7 @@ const Login = () => {
           service.login(values).then((response) => {
             if (response.status === 200) {
               const userInfo = response.data;
+              console.log(userInfo);
               localStorage.setItem(
                 "auth",
                 JSON.stringify({

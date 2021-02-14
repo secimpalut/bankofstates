@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
@@ -12,21 +11,18 @@ import Transactions from "../account/Transactions";
 import Divider from "@material-ui/core/Divider";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
-import "./Deposit.css";
+import "./Withdraw.css";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "../styles/typographyStyle.js";
-
 const useStyles = makeStyles(styles);
-
-const DepositSchema = Yup.object().shape({
+const WithdrawSchema = Yup.object().shape({
   amount: Yup.string().required("Required"),
   comment: Yup.string().required("Required"),
 });
-
-const DepositForm = (props) => (
+const WithdrawForm = (props) => (
   <div className="container">
     <fieldset>
-      <legend>Deposit</legend>
+      <legend>Withdraw</legend>
       <Form>
         <div className="row justify-content-start">
           <div className="col-lg-2 text-center p-3">
@@ -44,8 +40,8 @@ const DepositForm = (props) => (
               label="Comment"
               name="comment"
             />
-            {props.isSubmitting && <LinearProgress />}
           </div>
+          <div> {props.isSubmitting && <LinearProgress />}</div>
         </div>
         <div className="row justify-content-start">
           <div className="col-lg-4 text-center p-3">
@@ -54,7 +50,7 @@ const DepositForm = (props) => (
               color="primary"
               disabled={props.isSubmitting}
               onClick={props.submitForm}
-              className="deposit__btn"
+              className="withdraw__btn"
             >
               Submit
             </Button>
@@ -64,8 +60,7 @@ const DepositForm = (props) => (
     </fieldset>
   </div>
 );
-
-const Deposit = () => {
+const Withdraw = () => {
   const [{ userInfo }, dispatch] = useStateValue();
   const history = useHistory();
   const classes = useStyles();
@@ -78,27 +73,33 @@ const Deposit = () => {
           <div>
             <Formik
               initialValues={{
-                amount: "",
+                amount: null,
                 comment: "",
               }}
-              validationSchema={DepositSchema}
+              validationSchema={WithdrawSchema}
               onSubmit={(values, actions) => {
-                service.deposit(values).then((response) => {
+                service.withdraw(values).then((response) => {
                   if (response.status === 200) {
                     const userInfo = response.data;
-                    dispatch({
-                      type: "UPDATE",
-                      item: userInfo,
-                    });
-                    toast.success(userInfo.message, {
-                      position: toast.POSITION.TOP_CENTER,
-                    });
-                    actions.resetForm();
+                    if (userInfo.Success) {
+                      dispatch({
+                        type: "UPDATE",
+                        item: userInfo,
+                      });
+                      toast.success(userInfo.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                      });
+                      actions.resetForm();
+                    } else {
+                      toast.error(userInfo.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                      });
+                    }
                   }
                 });
                 actions.setSubmitting(false);
               }}
-              component={DepositForm}
+              component={WithdrawForm}
             ></Formik>
             <ToastContainer />
           </div>
@@ -110,5 +111,4 @@ const Deposit = () => {
     </div>
   );
 };
-
-export default Deposit;
+export default Withdraw;

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import { TextField } from "formik-material-ui";
-import service from "../service/BankService";
+import service from "../service/bankService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";

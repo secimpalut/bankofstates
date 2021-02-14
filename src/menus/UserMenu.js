@@ -18,6 +18,11 @@ const UserMenu = () => {
     setAnchorEl(null);
   };
 
+  const showDashboard = () => {
+    history.push("/user");
+    setAnchorEl(null);
+  };
+
   const handleDeposit = () => {
     history.push("/deposit");
     setAnchorEl(null);
@@ -26,12 +31,12 @@ const UserMenu = () => {
     history.push("/withdrawal");
     setAnchorEl(null);
   };
-  const handleTransfer = () => {
-    history.push("/transfer");
+  const addRecipient = () => {
+    history.push("/addRecipient");
     setAnchorEl(null);
   };
-  const handleTransaction = () => {
-    history.push("/transaction");
+  const handleTransfer = () => {
+    history.push("/transfer");
     setAnchorEl(null);
   };
   return (
@@ -52,10 +57,11 @@ const UserMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem onClick={showDashboard}>Dashboard</MenuItem>
         <MenuItem onClick={handleDeposit}>Deposit</MenuItem>
         <MenuItem onClick={handleWithdrawal}>Withdrawal</MenuItem>
+        <MenuItem onClick={addRecipient}>Add Recipient</MenuItem>
         <MenuItem onClick={handleTransfer}>Transfer</MenuItem>
-        <MenuItem onClick={handleTransaction}>Transaction</MenuItem>
       </Menu>
     </div>
   );
